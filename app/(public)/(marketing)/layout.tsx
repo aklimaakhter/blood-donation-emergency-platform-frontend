@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 
-function layout() {
+function layout({children}:{children: ReactNode}) {
   return (
-    <div>layout</div>
+    <div>{children}</div>
   )
 }
 
