@@ -6,6 +6,7 @@ import Providers from "./providers";
 import { Toaster } from "sonner";
 import Navbar from "@/components/ui/shared/navBar";
 import { Suspense } from "react";
+import Footer from "@/components/ui/shared/footer";
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Navbar />
         </Suspense>
            <Toaster richColors position="top-right" />
+           <Footer></Footer>
           </body>
       </Providers>
     </html>
