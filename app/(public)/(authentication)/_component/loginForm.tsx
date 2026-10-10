@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { loginAction, demoLoginAction } from "../_actions/authAction";
 import type { Role } from "@/lib/auth";
-import GoogleLoginButton from "./googleLoginButton";
+// import GoogleLoginButton from "./googleLoginButton";
 
 
 const DEMO_ROLES: { role: Role; label: string; emoji: string }[] = [
@@ -83,7 +83,7 @@ export default function LoginForm() {
         <span className="h-px flex-1 bg-gray-200" /> OR <span className="h-px flex-1 bg-gray-200" />
       </div>
 
-      <GoogleLoginButton />
+      {/* <GoogleLoginButton /> */}
 
       <p className="pt-2 text-center text-sm font-medium">🚀 Quick Demo Login</p>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
