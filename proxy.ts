@@ -23,7 +23,7 @@ async function getRole(req: NextRequest): Promise<Role | null> {
   }
 }
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const role = await getRole(req);
 

@@ -29,8 +29,20 @@ export default function RegisterForm() {
     defaultValues: { email: "", otp: "" },
   });
 
-  const sendOtp = async (values: RegisterFormInput) => {
-    const { confirmPassword: _ignored, ...payload } = values;
+  // const sendOtp = async (values: RegisterFormInput) => {
+  //   const { confirmPassword: _ignored, ...payload } = values;
+  //   const res = await registerAction(payload);
+  //   if (!res.success) {
+  //     toast.error(res.message);
+  //     return false;
+  //   }
+  //   toast.success(res.message);
+  //   return true;
+  // };
+
+const sendOtp = async (values: RegisterFormInput) => {
+  const { confirmPassword: _ignored, ...payload } = values;
+  try {
     const res = await registerAction(payload);
     if (!res.success) {
       toast.error(res.message);
@@ -38,7 +50,12 @@ export default function RegisterForm() {
     }
     toast.success(res.message);
     return true;
-  };
+  } catch (error) {
+    console.error("registerAction failed:", error);
+    toast.error("Kichu ekta bhul hoyeche, abar try koro");
+    return false;
+  }
+};
 
   const onInfoSubmit = async (values: RegisterFormInput) => {
     if (await sendOtp(values)) {

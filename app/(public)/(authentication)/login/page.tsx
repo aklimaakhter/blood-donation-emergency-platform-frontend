@@ -1,9 +1,27 @@
-import React from 'react'
+import type { Metadata } from "next";
+import LoginForm from "../_component/loginForm";
 
-function page() {
+export const metadata: Metadata = {
+  title: "Login | Blood Donation Platform",
+  description:
+    "Login to your account to request blood, donate, and manage emergency blood donation requests.",
+  openGraph: {
+    title: "Login | Blood Donation Platform",
+    description: "Login to your blood donation account.",
+    type: "website",
+  },
+};
+
+export default function LoginPage() {
   return (
-    <div>page</div>
-  )
+    <div className="flex min-h-screen items-center justify-center px-4">
+      <div className="w-full max-w-md space-y-6 rounded-lg border p-6 shadow-lg sm:p-8">
+        <div className="space-y-2 text-center">
+          <h1 className="text-3xl font-bold">Welcome Back 👋</h1>
+          <p className="text-gray-500">Login to your account</p>
+        </div>
+        <LoginForm />
+      </div>
+    </div>
+  );
 }
-
-export default page

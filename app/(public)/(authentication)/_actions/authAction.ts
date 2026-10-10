@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
 import { cookies } from "next/headers";
@@ -5,7 +6,7 @@ import { redirect } from "next/navigation";
 import { decodeJwt } from "jose";
 import { apiPost } from "@/lib/api";
 import { ROLE_HOME, type ActionState, type Role } from "@/lib/auth";
-import { loginSchema, RegisterInput, registerSchema, VerifyEmailInput, verifyEmailSchema } from "@/lib/validation";
+import { ForgotPasswordInput, forgotPasswordSchema, loginSchema, RegisterInput, registerSchema, ResetPasswordInput, resetPasswordSchema, VerifyEmailInput, verifyEmailSchema } from "@/lib/validation";
 
 
 interface Tokens {
@@ -79,6 +80,8 @@ export async function registerAction(input: RegisterInput): Promise<ActionState>
   return { success: res.success, message: res.message };
 }
 
+
+
 export async function verifyEmailAction(input: VerifyEmailInput): Promise<ActionState> {
   const parsed = verifyEmailSchema.safeParse(input);
   if (!parsed.success) {
@@ -93,6 +96,39 @@ export async function verifyEmailAction(input: VerifyEmailInput): Promise<Action
   }
   await setSession(res.data);
   redirect(ROLE_HOME.USER); 
+}
+
+export async function googleLoginAction(idToken: string): Promise<ActionState> {
+  if (!idToken) {
+    return { success: false, message: "Google token paoa jayni" };
+  }
+  const res = await apiPost<Tokens>("/auth/google", { idToken });
+  if (!res.success || !res.data) {
+    return { success: false, message: res.message };
+  }
+
+  await setSession(res.data);
+  const role = decodeJwt(res.data.accessToken).role as Role;
+  redirect(ROLE_HOME[role] ?? "/");
+}
+
+export async function forgotPasswordAction(input: ForgotPasswordInput): Promise<ActionState> {
+  const parsed = forgotPasswordSchema.safeParse(input);
+  if (!parsed.success) return { success: false, message: parsed.error.issues[0].message };
+  const res = await apiPost("/auth/forgot-password", {
+    email: parsed.data.email.trim().toLowerCase(),
+  });
+  return { success: res.success, message: res.message };
+}
+
+export async function resetPasswordAction(input: ResetPasswordInput): Promise<ActionState> {
+  const parsed = resetPasswordSchema.safeParse(input);
+  if (!parsed.success) return { success: false, message: parsed.error.issues[0].message };
+  const res = await apiPost("/auth/reset-password", {
+    ...parsed.data,
+    email: parsed.data.email.trim().toLowerCase(),
+  });
+  return { success: res.success, message: res.message };
 }
 
 export async function logoutAction() {

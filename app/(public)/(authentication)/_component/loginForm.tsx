@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useTransition } from "react";
+import { useActionState, useEffect, useState, useTransition } from "react";
 import Link from "next/link";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { loginAction, demoLoginAction } from "../_actions/authAction";
 import type { Role } from "@/lib/auth";
+import GoogleLoginButton from "./googleLoginButton";
 
 const DEMO_ROLES: { role: Role; label: string; emoji: string }[] = [
   { role: "ADMIN", label: "Admin", emoji: "👨‍💼" },
@@ -21,6 +22,7 @@ export default function LoginForm() {
     message: "",
   });
   const [demoPending, startDemo] = useTransition();
+  const [activeRole, setActiveRole] = useState<Role | null>(null);
 
   useEffect(() => {
     if (!state.message) return;
@@ -29,9 +31,13 @@ export default function LoginForm() {
   }, [state]);
 
   const handleDemo = (role: Role) => {
+    setActiveRole(role);
     startDemo(async () => {
       const result = await demoLoginAction(role);
-      if (result && !result.success) toast.error(result.message);
+      if (result && !result.success) {
+        toast.error(result.message);
+        setActiveRole(null);
+      }
     });
   };
 
@@ -42,7 +48,19 @@ export default function LoginForm() {
       <form action={action}>
         <Card className="space-y-4 border-gray-100 p-5 shadow-none">
           <Input name="email" type="email" placeholder="Enter your email" required />
-          <Input name="password" type="password" placeholder="Enter your password" required />
+
+          <div className="space-y-1">
+            <Input name="password" type="password" placeholder="Enter your password" required />
+            <div className="text-right">
+              <Link
+                href="/forgot-password"
+                className="text-xs text-emerald-600 hover:underline"
+              >
+                Forgot password?
+              </Link>
+            </div>
+          </div>
+
           <Button
             type="submit"
             disabled={busy}
@@ -50,9 +68,10 @@ export default function LoginForm() {
           >
             {pending ? "Signing in..." : "Sign in"}
           </Button>
+
           <div className="border-t border-gray-100 pt-3 text-center text-sm text-gray-600">
             Don&apos;t have an account?{" "}
-            <Link href="/auth/register" className="font-semibold text-emerald-600 hover:underline">
+            <Link href="/register" className="font-semibold text-emerald-600 hover:underline">
               Sign up
             </Link>
           </div>
@@ -63,7 +82,9 @@ export default function LoginForm() {
         <span className="h-px flex-1 bg-gray-200" /> OR <span className="h-px flex-1 bg-gray-200" />
       </div>
 
-      <p className="text-center text-sm font-medium">🚀 Quick Demo Login</p>
+      <GoogleLoginButton />
+
+      <p className="pt-2 text-center text-sm font-medium">🚀 Quick Demo Login</p>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         {DEMO_ROLES.map((r) => (
           <Card key={r.role} className="space-y-2 p-3 text-center shadow-none">
@@ -78,7 +99,7 @@ export default function LoginForm() {
               onClick={() => handleDemo(r.role)}
               className="w-full"
             >
-              Demo Login
+              {demoPending && activeRole === r.role ? "Logging in..." : "Demo Login"}
             </Button>
           </Card>
         ))}
