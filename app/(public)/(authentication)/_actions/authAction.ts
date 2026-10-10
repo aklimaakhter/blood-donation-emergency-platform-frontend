@@ -55,9 +55,18 @@ export async function loginAction(
 }
 
 const DEMO: Record<Role, { email?: string; password?: string }> = {
-  ADMIN: { email: process.env.DEMO_ADMIN_EMAIL, password: process.env.DEMO_ADMIN_PASSWORD },
-  USER: { email: process.env.DEMO_USER_EMAIL, password: process.env.DEMO_USER_PASSWORD },
-  DONOR: { email: process.env.DEMO_DONOR_EMAIL, password: process.env.DEMO_DONOR_PASSWORD },
+  ADMIN: {
+    email: process.env.TESTER_ADMIN_EMAIL,
+    password: process.env.TESTER_ADMIN_PASSWORD,
+  },
+  USER: {
+    email: process.env.TESTER_USER_EMAIL,
+    password: process.env.TESTER_USER_PASSWORD,
+  },
+  DONOR: {
+    email: process.env.TESTER_DONOR_EMAIL,
+    password: process.env.TESTER_DONOR_PASSWORD,
+  },
 };
 
 export async function demoLoginAction(role: Role): Promise<ActionState> {

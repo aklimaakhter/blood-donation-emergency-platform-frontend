@@ -29,16 +29,6 @@ export default function RegisterForm() {
     defaultValues: { email: "", otp: "" },
   });
 
-  // const sendOtp = async (values: RegisterFormInput) => {
-  //   const { confirmPassword: _ignored, ...payload } = values;
-  //   const res = await registerAction(payload);
-  //   if (!res.success) {
-  //     toast.error(res.message);
-  //     return false;
-  //   }
-  //   toast.success(res.message);
-  //   return true;
-  // };
 
 const sendOtp = async (values: RegisterFormInput) => {
   const { confirmPassword: _ignored, ...payload } = values;
@@ -143,7 +133,7 @@ const sendOtp = async (values: RegisterFormInput) => {
 
       <div className="border-t border-gray-100 pt-3 text-center text-sm text-gray-600">
         Already have an account?{" "}
-        <Link href="/auth/login" className="font-semibold text-emerald-600 hover:underline">
+        <Link href="/login" className="font-semibold text-emerald-600 hover:underline">
           Sign in
         </Link>
       </div>

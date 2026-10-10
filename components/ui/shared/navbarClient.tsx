@@ -16,9 +16,9 @@ interface NavbarClientProps {
 const PUBLIC_LINKS = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Services", href: "/services" },
-    { name: "FAQ", href: "/faq" },
-    { name: "Contact", href: "/contact" },
+    // { name: "Services", href: "/services" },
+    // { name: "FAQ", href: "/faq" },
+    // { name: "Contact", href: "/contact" },
 ];
 
 const ROLE_LABEL: Record<Role, string> = {

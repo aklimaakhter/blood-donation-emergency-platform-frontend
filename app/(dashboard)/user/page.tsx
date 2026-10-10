@@ -1,15 +1,8 @@
-import { logoutAction } from "@/app/(public)/(authentication)/_actions/authAction";
-import { Button } from "@/components/ui/button";
-
-export default function UserDashboardPage() {
+export default function DonorDashboardPage() {
   return (
-    <div className="space-y-4 p-6">
+    <div className="space-y-2">
       <h1 className="text-2xl font-bold">User Dashboard</h1>
-      <form action={logoutAction}>
-        <Button type="submit" variant="outline">
-          Logout
-        </Button>
-      </form>
+      <p className="text-gray-600">Manage your donor profile and donation history.</p>
     </div>
   );
 }
