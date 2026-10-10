@@ -10,6 +10,7 @@ import { loginAction, demoLoginAction } from "../_actions/authAction";
 import type { Role } from "@/lib/auth";
 import GoogleLoginButton from "./googleLoginButton";
 
+
 const DEMO_ROLES: { role: Role; label: string; emoji: string }[] = [
   { role: "ADMIN", label: "Admin", emoji: "👨‍💼" },
   { role: "USER", label: "User", emoji: "👤" },
