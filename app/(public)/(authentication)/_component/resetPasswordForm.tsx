@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter,useSearchParams  } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
@@ -12,12 +12,15 @@ import {
   type ResetPasswordFormInput,
 } from "@/lib/validation/auth.validation";
 
+
 function FieldError({ message }: { message?: string }) {
   return message ? <p className="mt-1 text-xs text-red-500">{message}</p> : null;
 }
 
-export default function ResetPasswordForm({ defaultEmail }: { defaultEmail: string }) {
+export default function ResetPasswordForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const defaultEmail = searchParams.get("email") ?? "";
   const {
     register,
     handleSubmit,
@@ -67,3 +70,4 @@ export default function ResetPasswordForm({ defaultEmail }: { defaultEmail: stri
     </form>
   );
 }
+

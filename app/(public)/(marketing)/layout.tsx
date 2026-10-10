@@ -1,9 +1,10 @@
-import React, { ReactNode } from 'react'
 
-function layout({children}:{children: ReactNode}) {
+
+export default function MarketingLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div>{children}</div>
-  )
+    <>
+      <main>{children}</main>
+      <footer />
+    </>
+  );
 }
-
-export default layout
