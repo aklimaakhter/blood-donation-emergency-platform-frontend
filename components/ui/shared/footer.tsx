@@ -78,10 +78,11 @@ export default function Footer() {
 				</div>
 			</div>
 
-			{/* Copyright */}
+						{/* Copyright */}
 			<div className="mx-auto max-w-7xl border-t border-gray-800 px-4 pt-6 text-center text-xs text-gray-500">
-				&copy; {new Date().getFullYear()} BloodConnect. All rights reserved.
+				&copy; 2026 BloodConnect. All rights reserved.
 			</div>
 		</footer>
 	);
+
 }
