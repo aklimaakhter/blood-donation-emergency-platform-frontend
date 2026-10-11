@@ -69,11 +69,11 @@ export default function Footer() {
 					</p>
 					<p className="flex items-center gap-2 text-sm">
 						<Mail className="h-4 w-4 shrink-0" aria-hidden="true" />
-						YOUR_REAL_EMAIL@gmail.com
+						aklima00191@gmail.com
 					</p>
 					<p className="flex items-center gap-2 text-sm">
 						<Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
-						YOUR_REAL_PHONE_NUMBER
+						01777403439
 					</p>
 				</div>
 			</div>
