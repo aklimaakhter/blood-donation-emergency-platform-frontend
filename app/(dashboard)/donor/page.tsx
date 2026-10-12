@@ -8,7 +8,7 @@ import { authFetch } from "@/lib/server-api";
 import type { Donor } from "@/lib/types";
 
 export default async function DonorDashboardPage() {
-  const res = await authFetch<Donor>("/donors/me");
+  const res = await authFetch<Donor>("/donor/me");
 
   if (res.status === 404) {
     return <EmptyState title="Donor profile paoa jayni" description="Admin approve korle profile ekhane dekhabe." />;

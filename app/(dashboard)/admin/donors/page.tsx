@@ -22,7 +22,7 @@ export default async function AdminDonorsPage({ searchParams }: { searchParams: 
   const status = STATUSES.find((s) => s === raw);
   const page = Math.max(1, Number(first(sp.page)) || 1);
 
-  const res = await authFetch<Donor[]>(`/donors/applications${status ? `?status=${status}` : ""}`);
+  const res = await authFetch<Donor[]>(`/donor/applications${status ? `?status=${status}` : ""}`);
   const all = res.data ?? [];
   const totalPages = Math.max(1, Math.ceil(all.length / PAGE));
   const current = Math.min(page, totalPages);
@@ -31,7 +31,7 @@ export default async function AdminDonorsPage({ searchParams }: { searchParams: 
   const tab = (label: string, value?: string) => (
     <Link
       key={label}
-      href={value ? `/admin/donors?status=${value}` : "/admin/donors"}
+      href={value ? `/admin/donor?status=${value}` : "/admin/donor"}
       className={`rounded-full border px-3 py-1 text-sm ${
         status === value || (!status && !value)
           ? "border-emerald-600 bg-emerald-50 font-semibold text-emerald-700"
@@ -83,7 +83,7 @@ export default async function AdminDonorsPage({ searchParams }: { searchParams: 
               </tbody>
             </table>
           </div>
-          <Pagination page={current} totalPages={totalPages} basePath="/admin/donors" params={{ status }} />
+          <Pagination page={current} totalPages={totalPages} basePath="/admin/donor" params={{ status }} />
         </>
       )}
     </div>

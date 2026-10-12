@@ -17,7 +17,7 @@ export async function applyDonorAction(input: ApplyDonorInput): Promise<ActionSt
   const parsed = applyDonorSchema.safeParse(input);
   if (!parsed.success) return { success: false, message: parsed.error.issues[0].message };
 
-  const res = await authFetch("/donors/apply", { method: "POST", body: JSON.stringify(parsed.data) });
+  const res = await authFetch("/donor/apply", { method: "POST", body: JSON.stringify(parsed.data) });
   if (res.success) revalidatePath("/user");
   return { success: res.success, message: res.message };
 }
@@ -26,7 +26,7 @@ export async function updateDonorProfileAction(input: UpdateDonorInput): Promise
   const parsed = updateDonorSchema.safeParse(input);
   if (!parsed.success) return { success: false, message: parsed.error.issues[0].message };
 
-  const res = await authFetch("/donors/me", { method: "PATCH", body: JSON.stringify(parsed.data) });
+  const res = await authFetch("/donor/me", { method: "PATCH", body: JSON.stringify(parsed.data) });
   if (res.success) revalidatePath("/donor");
   return { success: res.success, message: res.message };
 }
@@ -35,11 +35,11 @@ export async function updateDonorStatusAction(
   id: string,
   status: "APPROVED" | "REJECTED",
 ): Promise<ActionState> {
-  const res = await authFetch(`/donors/${id}/status`, {
+  const res = await authFetch(`/donor/${id}/status`, {
     method: "PATCH",
     body: JSON.stringify({ status }),
   });
-  if (res.success) revalidatePath("/admin/donors");
+  if (res.success) revalidatePath("/admin/donor");
   return { success: res.success, message: res.message };
 }
 
