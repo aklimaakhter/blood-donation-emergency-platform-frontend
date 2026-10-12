@@ -66,8 +66,6 @@ const sendOtp = async (values: RegisterFormInput) => {
 
   return (
     <Card className="space-y-4 border-gray-100 p-5 shadow-none">
-      <p className="text-center text-xs text-gray-500">Step {step} of 2</p>
-
       {step === 1 ? (
         <form onSubmit={infoForm.handleSubmit(onInfoSubmit)} className="space-y-4">
           <div>

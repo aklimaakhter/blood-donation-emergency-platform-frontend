@@ -11,7 +11,7 @@ export default function AvailabilityToggle({ initial }: { initial: boolean }) {
   const toggle = () => {
     const next = !available;
     startTransition(async () => {
-      setAvailable(next); // sathe sathe UI bodlay, fail korle nijei ager obosthay phire jay
+      setAvailable(next); 
       const res = await updateDonorProfileAction({ isAvailable: next });
       if (res.success) toast.success(next ? "You are now available" : "You are now unavailable");
       else toast.error(res.message);
