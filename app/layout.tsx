@@ -46,58 +46,85 @@
 //   );
 // }
 
+// import type { Metadata } from "next";
+// import { Geist, Geist_Mono, Inter } from "next/font/google";
+// import { Toaster } from "sonner";
+// import "./globals.css";
+// import Providers from "./providers";
+// import { cn } from "@/lib/utils";
+
+// const geistSans = Geist({
+// 	variable: "--font-geist-sans",
+// 	subsets: ["latin"],
+// });
+
+// const geistMono = Geist_Mono({
+// 	variable: "--font-geist-mono",
+// 	subsets: ["latin"],
+// });
+
+// const inter = Inter({
+// 	subsets: ["latin"],
+// 	variable: "--font-inter",
+// });
+
+// export const metadata: Metadata = {
+// 	title: "BloodConnect | Blood Donation & Emergency Platform",
+// 	description:
+// 		"Connect blood donors with patients in emergency need, quickly and securely.",
+// };
+
+// export default function RootLayout({
+// 	children,
+// }: {
+// 	children: React.ReactNode;
+// }) {
+// 	return (
+// 		<html
+// 			lang="en"
+// 			className={cn(
+// 				"h-full",
+// 				"antialiased",
+// 				geistSans.variable,
+// 				geistMono.variable,
+// 				"font-sans",
+// 				inter.variable,
+// 			)}
+// 		>
+// 			<body className="flex min-h-full flex-col">
+// 				<Providers>
+// 					{children}
+// 					<Toaster richColors position="top-right" />
+// 				</Providers>
+// 			</body>
+// 		</html>
+// 	);
+// }
+
+
+
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
-import { Toaster } from "sonner";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
+import { Toaster } from "@/components/ui/sonner"; // ba: import { Toaster } from "sonner";
 import { cn } from "@/lib/utils";
 
-const geistSans = Geist({
-	variable: "--font-geist-sans",
-	subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
-	subsets: ["latin"],
-});
-
-const inter = Inter({
-	subsets: ["latin"],
-	variable: "--font-inter",
-});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
+const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
 
 export const metadata: Metadata = {
-	title: "BloodConnect | Blood Donation & Emergency Platform",
-	description:
-		"Connect blood donors with patients in emergency need, quickly and securely.",
+  title: "BloodConnect | Blood Donation & Emergency Platform",
+  description: "Find blood donors and post emergency blood requests.",
 };
 
-export default function RootLayout({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
-	return (
-		<html
-			lang="en"
-			className={cn(
-				"h-full",
-				"antialiased",
-				geistSans.variable,
-				geistMono.variable,
-				"font-sans",
-				inter.variable,
-			)}
-		>
-			<body className="flex min-h-full flex-col">
-				<Providers>
-					{children}
-					<Toaster richColors position="top-right" />
-				</Providers>
-			</body>
-		</html>
-	);
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" className={cn("font-sans antialiased", geist.variable, geistMono.variable)}>
+      <body>
+        <Providers>{children}</Providers>
+        <Toaster richColors position="top-right" />
+      </body>
+    </html>
+  );
 }
-

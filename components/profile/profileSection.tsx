@@ -7,7 +7,7 @@ import AvatarUploader from "./avatarUploader";
 import ProfileForm from "./profileForm";
 
 export default async function ProfileSection() {
-  const res = await authFetch<UserProfile>(`${ENDPOINTS.users}/me`);
+  const res = await authFetch<UserProfile>(`${ENDPOINTS.auth}/me`);
   if (!res.success || !res.data) return <InlineError message={res.message} />;
 
   const user = res.data;
