@@ -42,7 +42,7 @@ const sendOtp = async (values: RegisterFormInput) => {
     return true;
   } catch (error) {
     console.error("registerAction failed:", error);
-    toast.error("Kichu ekta bhul hoyeche, abar try koro");
+    toast.error("Something went wrong. Please try again.");
     return false;
   }
 };
@@ -99,7 +99,7 @@ const sendOtp = async (values: RegisterFormInput) => {
       ) : (
         <form onSubmit={otpForm.handleSubmit(onOtpSubmit)} className="space-y-4">
           <p className="text-sm text-gray-600">
-            Amra <b>{pendingData?.email}</b>-e ekta 6 digit OTP pathiyechi (5 minute valid).
+            We sent a 6-digit code to <b>{pendingData?.email}</b>. It is valid for 5 minutes.
           </p>
           <div>
             <Input

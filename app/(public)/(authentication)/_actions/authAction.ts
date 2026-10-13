@@ -72,7 +72,7 @@ const DEMO: Record<Role, { email?: string; password?: string }> = {
 export async function demoLoginAction(role: Role): Promise<ActionState> {
   const { email, password } = DEMO[role];
   if (!email || !password) {
-    return { success: false, message: "Demo credentials set kora nai" };
+    return { success: false, message: "Demo credentials are not configured." };
   }
   return loginWith(email, password);
 }
@@ -107,19 +107,6 @@ export async function verifyEmailAction(input: VerifyEmailInput): Promise<Action
   redirect(ROLE_HOME.USER); 
 }
 
-export async function googleLoginAction(idToken: string): Promise<ActionState> {
-  if (!idToken) {
-    return { success: false, message: "Google token paoa jayni" };
-  }
-  const res = await apiPost<Tokens>("/auth/google", { idToken });
-  if (!res.success || !res.data) {
-    return { success: false, message: res.message };
-  }
-
-  await setSession(res.data);
-  const role = decodeJwt(res.data.accessToken).role as Role;
-  redirect(ROLE_HOME[role] ?? "/");
-}
 
 export async function forgotPasswordAction(input: ForgotPasswordInput): Promise<ActionState> {
   const parsed = forgotPasswordSchema.safeParse(input);

@@ -12,13 +12,13 @@ export default async function DonorRequestsPage() {
   const me = await authFetch<Donor>(`${ENDPOINTS.donors}/me`);
 
   if (me.status === 404) {
-    return <EmptyState title="Donor profile paoa jayni" description="Admin approve korle request dekhte parbe." />;
+    return <EmptyState title="Donor profile not found" description="Matching requests will appear here once an administrator approves your application." />;
   }
   if (!me.success || !me.data) return <InlineError message={me.message} />;
 
   const donor = me.data;
   if (donor.status !== "APPROVED") {
-    return <EmptyState title="Application ekhono approved na" description="Approve hole matching request ekhane dekhabe." />;
+    return <EmptyState title="Your application is not approved yet" description="Once approved, matching requests will appear here." />;
   }
 
   const [pendingRes, approvedRes] = await Promise.all([
@@ -37,12 +37,12 @@ export default async function DonorRequestsPage() {
       <section className="space-y-4">
         <div>
           <h1 className="text-2xl font-bold">Blood Requests</h1>
-          <p className="text-sm text-gray-500">Tomar blood group ({label}) er open request.</p>
+          <p className="text-sm text-gray-500">Open requests that match your blood group ({label}).</p>
         </div>
         {!pendingRes.success ? (
           <InlineError message={pendingRes.message} />
         ) : open.length === 0 ? (
-          <EmptyState title="Ekhon kono matching request nai" />
+          <EmptyState title="No matching requests right now" />
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {open.map((r) => (
@@ -59,7 +59,7 @@ export default async function DonorRequestsPage() {
         {!approvedRes.success ? (
           <InlineError message={approvedRes.message} />
         ) : mine.length === 0 ? (
-          <EmptyState title="Ekhono kono request accept koro ni" />
+          <EmptyState title="You have not accepted any requests yet" />
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {mine.map((r) => (

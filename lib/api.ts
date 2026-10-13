@@ -18,7 +18,7 @@
 //     }
 //     return json as ApiResponse<T>;
 //   } catch {
-//     return { success: false, message: "Server-e connect kora jacche na", data: null };
+//     return { success: false, message: "Unable to reach the server. Please try again.", data: null };
 //   }
 // }
 
@@ -58,7 +58,7 @@ export async function apiPost<T>(path: string, body: unknown): Promise<ApiRespon
     console.error("API POST Fetch Error:", error);
     return {
       success: false,
-      message: "Server-e connect kora jacche na",
+      message: "Unable to reach the server. Please try again.",
       data: null,
     };
   }

@@ -5,13 +5,13 @@ import { ENDPOINTS } from "@/lib/endpoints";
 export async function POST(req: Request) {
   const token = (await cookies()).get("accessToken")?.value;
   if (!token) {
-    return NextResponse.json({ success: false, message: "Login koro" }, { status: 401 });
+    return NextResponse.json({ success: false, message: "Please log in" }, { status: 401 });
   }
 
   const incoming = await req.formData();
   const file = incoming.get("file");
   if (!(file instanceof File)) {
-    return NextResponse.json({ success: false, message: "File paoa jayni" }, { status: 400 });
+    return NextResponse.json({ success: false, message: "No file received" }, { status: 400 });
   }
 
   const form = new FormData();
@@ -30,6 +30,6 @@ export async function POST(req: Request) {
       { status: res.status },
     );
   } catch {
-    return NextResponse.json({ success: false, message: "Server-e connect kora jacche na" }, { status: 502 });
+    return NextResponse.json({ success: false, message: "Unable to reach the server. Please try again." }, { status: 502 });
   }
 }

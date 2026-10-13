@@ -12,7 +12,7 @@ export async function authFetch<T>(
   init: Omit<RequestInit, "headers"> = {},
 ): Promise<ServerResult<T>> {
   if (!BASE) {
-    return { success: false, message: "NEXT_PUBLIC_API_URL set kora nai", data: null, status: 0 };
+    return { success: false, message: "The API URL is not configured.", data: null, status: 0 };
   }
   const token = (await cookies()).get("accessToken")?.value;
 
@@ -32,6 +32,6 @@ export async function authFetch<T>(
     }
     return { ...(json as ApiResponse<T>), status: res.status };
   } catch {
-    return { success: false, message: "Server-e connect kora jacche na", data: null, status: 0 };
+    return { success: false, message: "Unable to reach the server. Please try again.", data: null, status: 0 };
   }
 }

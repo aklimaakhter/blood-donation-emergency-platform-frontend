@@ -32,7 +32,7 @@ export default async function MyRequestsPage({ searchParams }: { searchParams: S
       {!res.success ? (
         <InlineError message={res.message} />
       ) : rows.length === 0 ? (
-        <EmptyState title="Kono request nai" description="Rokto lagle notun request koro." />
+        <EmptyState title="No requests yet" description="Create a request when you need blood." />
       ) : (
         <>
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">

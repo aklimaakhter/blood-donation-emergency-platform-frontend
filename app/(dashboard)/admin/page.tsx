@@ -8,7 +8,7 @@ export default function AdminDashboardPage() {
       <Link href="/admin/donors" className="block max-w-sm">
         <Card className="p-5 shadow-none transition hover:border-emerald-600">
           <p className="font-semibold">Donor applications</p>
-          <p className="text-sm text-gray-500">Approve ba reject koro</p>
+          <p className="text-sm text-gray-500">Review, approve or reject applications</p>
         </Card>
       </Link>
     </div>

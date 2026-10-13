@@ -47,7 +47,7 @@ export async function updateDonorStatusAction(
 export async function refreshSessionAction(): Promise<ActionState> {
   const store = await cookies();
   const refreshToken = store.get("refreshToken")?.value;
-  if (!refreshToken) return { success: false, message: "Session nai, abar login koro" };
+  if (!refreshToken) return { success: false, message: "Your session has expired. Please log in again." };
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/refresh-token`, {
     method: "POST",
@@ -56,7 +56,7 @@ export async function refreshSessionAction(): Promise<ActionState> {
   });
   const json = await res.json().catch(() => null);
   if (!res.ok || !json?.success) {
-    return { success: false, message: json?.message ?? "Session refresh hoyni" };
+    return { success: false, message: json?.message ?? "Could not refresh your session." };
   }
 
   const base = {

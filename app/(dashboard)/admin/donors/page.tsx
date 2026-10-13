@@ -54,7 +54,7 @@ export default async function AdminDonorsPage({ searchParams }: { searchParams: 
       {!res.success ? (
         <InlineError message={res.message} />
       ) : rows.length === 0 ? (
-        <EmptyState title="No applications found" description="Ei status-e kono application nai." />
+        <EmptyState title="No applications found" description="There are no applications with this status." />
       ) : (
         <>
           <div className="overflow-x-auto rounded-lg border">

@@ -45,7 +45,7 @@ export default async function AdminRequestsPage({ searchParams }: { searchParams
       {!res.success ? (
         <InlineError message={res.message} />
       ) : rows.length === 0 ? (
-        <EmptyState title="No requests found" description="Filter bodlao ba clear koro." />
+        <EmptyState title="No requests found" description="Try changing or clearing the filters." />
       ) : (
         <>
           <div className="overflow-x-auto rounded-lg border">

@@ -11,7 +11,7 @@ export default async function DonorDashboardPage() {
   const res = await authFetch<Donor>("/donor/me");
 
   if (res.status === 404) {
-    return <EmptyState title="Donor profile paoa jayni" description="Admin approve korle profile ekhane dekhabe." />;
+    return <EmptyState title="Donor profile not found" description="Your profile will appear here once an administrator approves your application." />;
   }
   if (!res.success || !res.data) return <InlineError message={res.message} />;
 
@@ -24,7 +24,7 @@ export default async function DonorDashboardPage() {
       <Card className="flex items-center justify-between gap-4 p-5 shadow-none">
         <div>
           <p className="font-semibold">Availability</p>
-          <p className="text-sm text-gray-500">Unavailable thakle search-e tomake emergency-te dekhabe na.</p>
+          <p className="text-sm text-gray-500">While you are unavailable, you will not show up in searches for available donors.</p>
         </div>
         <div className="flex items-center gap-3">
           <StatusBadge status={donor.status} />

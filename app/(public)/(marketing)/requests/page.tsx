@@ -41,7 +41,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Sea
     <section className="mx-auto max-w-7xl space-y-6 px-4 py-8 sm:px-6 lg:px-8">
       <div>
         <h1 className="text-3xl font-bold">Blood Requests</h1>
-        <p className="mt-1 text-gray-500">Emergency-te rokto lagche emon rogider list.</p>
+        <p className="mt-1 text-gray-500">Patients who need blood in an emergency.</p>
       </div>
 
       <Suspense fallback={<div className="h-9 animate-pulse rounded bg-gray-100" />}>
@@ -51,7 +51,7 @@ export default async function RequestsPage({ searchParams }: { searchParams: Sea
       {!res.success ? (
         <InlineError message={res.message} />
       ) : rows.length === 0 ? (
-        <EmptyState title="No requests found" description="Filter bodlao ba clear koro." />
+        <EmptyState title="No requests found" description="Try changing or clearing the filters." />
       ) : (
         <>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

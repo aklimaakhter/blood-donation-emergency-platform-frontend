@@ -21,8 +21,8 @@ export default function AvatarUploader({ name, imageUrl }: { name: string; image
   const onPick = (e: React.ChangeEvent<HTMLInputElement>) => {
     const picked = e.target.files?.[0];
     if (!picked) return;
-    if (!picked.type.startsWith("image/")) return toast.error("Shudhu image file dao");
-    if (picked.size > MAX_SIZE) return toast.error("Image 2MB-er choto hote hobe");
+    if (!picked.type.startsWith("image/")) return toast.error("Please choose an image file");
+    if (picked.size > MAX_SIZE) return toast.error("Image must be smaller than 2 MB");
     if (preview) URL.revokeObjectURL(preview);
     setFile(picked);
     setPreview(URL.createObjectURL(picked));
@@ -55,7 +55,7 @@ export default function AvatarUploader({ name, imageUrl }: { name: string; image
     };
     xhr.onerror = () => {
       setUploading(false);
-      toast.error("Network error, abar try koro");
+      toast.error("Network error. Please try again.");
     };
 
     const fd = new FormData();

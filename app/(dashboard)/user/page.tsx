@@ -24,16 +24,16 @@ export default async function UserDashboardPage() {
             <StatusBadge status={donor.status} />
           </div>
           {donor.status === "PENDING" && (
-            <p className="text-sm text-gray-600">Admin review korche. Approve hole email pabe.</p>
+            <p className="text-sm text-gray-600">Your application is under review. You will receive an email once it is approved.</p>
           )}
           {donor.status === "APPROVED" && (
             <>
-              <p className="text-sm text-gray-600">Tomar application approved. Donor dashboard-e jao.</p>
+              <p className="text-sm text-gray-600">Your application has been approved. Switch to your donor dashboard to start helping.</p>
               <RefreshRoleButton />
             </>
           )}
           {donor.status === "REJECTED" && (
-            <p className="text-sm text-gray-600">Application reject hoyeche. 24 ghonta por abar apply korte paro.</p>
+            <p className="text-sm text-gray-600">Your application was rejected. You can apply again after 24 hours.</p>
           )}
         </Card>
       )}
