@@ -76,7 +76,7 @@ export default function HomePage() {
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
-              href="/donors"
+              href="/donor"
               className={cn(
                 buttonVariants(),
                 "h-11 bg-emerald-600 px-6 text-base text-white hover:bg-emerald-700",
@@ -129,7 +129,7 @@ export default function HomePage() {
             {BLOOD_GROUP_VALUES.map((v) => (
               <Link
                 key={v}
-                href={`/donors?bloodGroup=${v}`}
+                href={`/donor?bloodGroup=${v}`}
                 className="rounded-lg border bg-white py-5 text-center text-2xl font-bold text-red-600 transition hover:border-red-300 hover:bg-red-50"
               >
                 {BLOOD_GROUP_LABEL[v]}
