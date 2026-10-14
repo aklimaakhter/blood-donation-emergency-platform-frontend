@@ -5,6 +5,7 @@ const LINKS = [
   { name: "My Requests", href: "/user/requests" },
   { name: "New Request", href: "/user/requests/new" },
   { name: "Profile", href: "/user/profile" },
+  { name: "Payments", href: "/user/payments" },
 ];
 
 export default function UserLayout({ children }: { children: React.ReactNode }) {

@@ -86,3 +86,15 @@ export interface UserProfile {
   imageUrl: string | null;
   role: "ADMIN" | "USER" | "DONOR";
 }
+
+export type DonationStatus = "PENDING" | "PAID" | "FAILED";
+
+export interface Donation {
+  id: string;
+  userId: string;
+  amount: number; // cents
+  currency: string;
+  status: DonationStatus;
+  stripeSessionId: string;
+  createdAt: string;
+}
