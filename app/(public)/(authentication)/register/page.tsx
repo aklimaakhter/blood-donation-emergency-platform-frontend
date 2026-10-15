@@ -1,4 +1,16 @@
 import RegisterForm from "../_component/registerForm";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Create Account | BloodConnect",
+  description:
+    "Create a BloodConnect account to request blood, apply as a donor and help patients in emergency need.",
+  openGraph: {
+    title: "Create Account | BloodConnect",
+    description: "Join the blood donation community.",
+    type: "website",
+  },
+};
 
 export default function RegisterPage() {
   return (

@@ -1,5 +1,15 @@
 import ForgotPasswordForm from "../_component/forgotPasswordForm";
+import type { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Forgot Password | BloodConnect",
+  description: "Request a one-time code to reset your BloodConnect password.",
+  openGraph: {
+    title: "Forgot Password | BloodConnect",
+    description: "Reset your BloodConnect password with a one-time code.",
+    type: "website",
+  },
+};
 
 export default function ForgotPasswordPage() {
   return (
