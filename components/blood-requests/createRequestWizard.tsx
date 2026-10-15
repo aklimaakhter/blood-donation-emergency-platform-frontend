@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,6 +13,8 @@ import {
   type BloodRequestInput,
 } from "@/lib/validation/blood-request.validation";
 import BloodGroupOptions from "../donor/bloodGroupOptions";
+import { useEffect } from "react";
+import { useRequestDraft } from "@/stores/requestDraftStore";
 
 const STEPS: { title: string; fields: (keyof BloodRequestInput)[] }[] = [
   { title: "Patient", fields: ["patientName", "bloodGroup", "bagsNeeded"] },
@@ -29,13 +30,16 @@ function FieldError({ message }: { message?: string }) {
 
 export default function CreateRequestWizard() {
   const router = useRouter();
-  const [step, setStep] = useState(0);
+  const { step, setStep, setDraft, clear } = useRequestDraft();
   const last = STEPS.length - 1;
 
   const {
     register,
     handleSubmit,
     trigger,
+    reset,
+    getValues,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<BloodRequestInput>({
     resolver: zodResolver(bloodRequestSchema),
@@ -52,18 +56,32 @@ export default function CreateRequestWizard() {
       reason: "",
     },
   });
+    // Restore the saved draft once after mount
+  useEffect(() => {
+    void Promise.resolve(useRequestDraft.persist.rehydrate()).then(() => {
+      const saved = useRequestDraft.getState().draft;
+      if (Object.keys(saved).length > 0) reset({ ...getValues(), ...saved });
+    });
+  }, [reset, getValues]);
+
+  // Save every change to the store
+  useEffect(() => {
+    const subscription = watch((values) => setDraft(values as Partial<BloodRequestInput>));
+    return () => subscription.unsubscribe();
+  }, [watch, setDraft]);
 
   const next = async () => {
     const ok = await trigger(STEPS[step].fields);
-    if (ok) setStep((s) => Math.min(s + 1, last));
+    if (ok) setStep(Math.min(step + 1, last));
   };
 
-  const onSubmit = async (values: BloodRequestInput) => {
-    const res = await createBloodRequestAction(values);
-    if (!res.success) return toast.error(res.message);
-    toast.success(res.message);
-    router.push("/user/requests");
-  };
+ const onSubmit = async (values: BloodRequestInput) => {
+  const res = await createBloodRequestAction(values);
+  if (!res.success) return toast.error(res.message);
+  toast.success(res.message);
+  clear();
+  router.push("/user/requests");
+};
 
   return (
     <Card className="max-w-xl space-y-5 p-5 shadow-none">
@@ -166,7 +184,7 @@ export default function CreateRequestWizard() {
             type="button"
             variant="outline"
             disabled={step === 0 || isSubmitting}
-            onClick={() => setStep((s) => Math.max(s - 1, 0))}
+            onClick={() => setStep(Math.max(step - 1, 0))}
           >
             Back
           </Button>
