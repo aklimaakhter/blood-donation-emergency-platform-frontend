@@ -83,7 +83,7 @@ export default function LoginForm() {
         <span className="h-px flex-1 bg-gray-200" /> OR <span className="h-px flex-1 bg-gray-200" />
       </div>
 
-      <p className="pt-2 text-center text-sm font-medium">🚀 Quick Demo Login</p>
+      <p className="pt-2 text-center text-sm font-medium"> Quick Demo Login</p>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         {DEMO_ROLES.map((r) => (
           <Card key={r.role} className="space-y-2 p-3 text-center shadow-none">
