@@ -56,7 +56,6 @@ export default function CreateRequestWizard() {
       reason: "",
     },
   });
-    // Restore the saved draft once after mount
   useEffect(() => {
     void Promise.resolve(useRequestDraft.persist.rehydrate()).then(() => {
       const saved = useRequestDraft.getState().draft;
@@ -64,7 +63,6 @@ export default function CreateRequestWizard() {
     });
   }, [reset, getValues]);
 
-  // Save every change to the store
   useEffect(() => {
     const subscription = watch((values) => setDraft(values as Partial<BloodRequestInput>));
     return () => subscription.unsubscribe();
@@ -99,7 +97,6 @@ export default function CreateRequestWizard() {
       <form
         onSubmit={handleSubmit(onSubmit)}
         onKeyDown={(e) => {
-          // Enter chaple form jeno age-e submit na hoy
           if (e.key === "Enter" && step < last && (e.target as HTMLElement).tagName !== "TEXTAREA") {
             e.preventDefault();
             next();

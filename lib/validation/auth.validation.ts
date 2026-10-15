@@ -19,7 +19,7 @@ export const registerSchema = z.object({
   password,
 });
 
-// form-er jonno (confirm password frontend-only)
+
 export const registerFormSchema = registerSchema
   .extend({ confirmPassword: z.string().min(1, "Confirm your password") })
   .refine((d) => d.password === d.confirmPassword, {

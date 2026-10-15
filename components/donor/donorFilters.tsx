@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { useEffect, useState, useTransition } from "react";
@@ -27,7 +28,7 @@ export default function DonorFilters() {
 
   useEffect(() => {
     if ((params.get("searchTerm") ?? "") !== debouncedSearch) update("searchTerm", debouncedSearch);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, [debouncedSearch]);
 
   const clear = () => {

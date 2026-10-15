@@ -92,7 +92,7 @@ export type DonationStatus = "PENDING" | "PAID" | "FAILED";
 export interface Donation {
   id: string;
   userId: string;
-  amount: number; // cents
+  amount: number; 
   currency: string;
   status: DonationStatus;
   stripeSessionId: string;

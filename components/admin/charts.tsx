@@ -32,6 +32,28 @@ interface ChartCardProps {
   children: React.ReactNode;
 }
 
+interface BarCardProps {
+  title: string;
+  description: string;
+  data: ChartPoint[];
+  color: string;
+  seriesName: string;
+}
+
+interface PieCardProps {
+  title: string;
+  description: string;
+  data: ChartPoint[];
+}
+
+interface AreaCardProps {
+  title: string;
+  description: string;
+  data: ChartPoint[];
+  currency: string;
+}
+
+
 function ChartCard({ title, description, data, children }: ChartCardProps) {
   const empty = data.every((d) => d.value === 0);
   const summary = data.map((d) => `${d.name}: ${d.value}`).join(", ");
@@ -55,13 +77,6 @@ function ChartCard({ title, description, data, children }: ChartCardProps) {
   );
 }
 
-interface BarCardProps {
-  title: string;
-  description: string;
-  data: ChartPoint[];
-  color: string;
-  seriesName: string;
-}
 
 export function BarChartCard({ title, description, data, color, seriesName }: BarCardProps) {
   return (
@@ -77,12 +92,6 @@ export function BarChartCard({ title, description, data, color, seriesName }: Ba
       </ResponsiveContainer>
     </ChartCard>
   );
-}
-
-interface PieCardProps {
-  title: string;
-  description: string;
-  data: ChartPoint[];
 }
 
 export function PieChartCard({ title, description, data }: PieCardProps) {
@@ -108,13 +117,6 @@ export function PieChartCard({ title, description, data }: PieCardProps) {
       </ResponsiveContainer>
     </ChartCard>
   );
-}
-
-interface AreaCardProps {
-  title: string;
-  description: string;
-  data: ChartPoint[];
-  currency: string;
 }
 
 export function AreaChartCard({ title, description, data, currency }: AreaCardProps) {

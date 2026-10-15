@@ -27,7 +27,7 @@ export default function ContactForm() {
         defaultValues: { name: "", email: "", subject: "", message: "" },
     });
 
-    // Backend-e contact endpoint nai, tai validated message email app-e khule dey
+    
     const onSubmit = (values: ContactInput) => {
         const body = `${values.message}\n\n${values.name}\n${values.email}`;
         const href = `mailto:${SITE.email}?subject=${encodeURIComponent(values.subject)}&body=${encodeURIComponent(body)}`;

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { useEffect, useState } from "react";
@@ -17,7 +18,6 @@ export default function RequestFilters({ statuses }: { statuses?: readonly strin
 
   useEffect(() => {
     if ((params.get("searchTerm") ?? "") !== debounced) set("searchTerm", debounced);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounced]);
 
   return (

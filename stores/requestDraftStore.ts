@@ -22,7 +22,6 @@ export const useRequestDraft = create<RequestDraftState>()(
     {
       name: "blood-request-draft",
       storage: createJSONStorage(() => sessionStorage),
-      // Rehydrate manually after mount so server and client HTML match
       skipHydration: true,
     },
   ),

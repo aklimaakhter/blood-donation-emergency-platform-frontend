@@ -37,7 +37,7 @@ export function applicationsByStatus(donors: Donor[]): ChartPoint[] {
 
 const dayKey = (d: Date) => d.toISOString().slice(0, 10);
 
-// Paid donations per day for the last N days (major units, e.g. dollars)
+
 export function donationsByDay(donations: Donation[], days = 14): ChartPoint[] {
   const buckets = new Map<string, number>();
   for (let i = days - 1; i >= 0; i--) {
